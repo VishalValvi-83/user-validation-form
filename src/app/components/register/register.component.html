@@ -1,0 +1,98 @@
+<div class="register-container">
+    <div class="card p-4" style="max-width: 500px; width: 100%;">
+        <h3 class="text-center">📝 Register</h3>
+
+        <form [formGroup]="user" (ngSubmit)="onRegister()" autocomplete="off">
+
+            <div class="mb-2">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" class="form-control"
+                    formControlName="fullName" placeholder="Your full name">
+                <span class="text-danger error"
+                    *ngIf="user.get('fullName')?.touched && user.get('fullName')?.invalid">
+                    Full name is required / Must contain at least 3 characters.
+                </span>
+            </div>
+            <div class="mb-2">
+                <label for="email">Email Address *</label>
+                <input type="email" class="form-control"
+                    formControlName="email" placeholder="Enter email">
+                <span class="text-danger error"
+                    *ngIf="user.get('email')?.touched && user.get('email')?.invalid">
+                    Valid email is required.
+                </span>
+            </div>
+            <div class="mb-2">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" class="form-control"
+                    formControlName="phone" placeholder="Enter phone number">
+                <span class="text-danger error"
+                    *ngIf="user.get('phone')?.touched && user.get('phone')?.invalid">
+                    Phone number is required.
+                </span>
+            </div>
+            <div class="d-flex gap-3">
+                <div>
+                    <label for="gender">Gender *</label>
+                    <select class="form-select"
+                        formControlName="gender">
+                        <option value disabled>Select gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                        <option value="Prefer not to say">Prefer not to
+                            say</option>
+                    </select>
+                    <span class="text-danger error"
+                        *ngIf="user.get('gender')?.touched && user.get('gender')?.invalid">
+                        Gender is required.
+                    </span>
+                </div>
+                <div>
+                    <label for="dob">Date of Birth *</label>
+                    <input type="date" class="form-control"
+                        formControlName="dob">
+                    <span class="text-danger error"
+                        *ngIf="user.get('dob')?.touched && user.get('dob')?.invalid">
+                        Date of Birth is required.
+                    </span>
+                </div>
+            </div>
+            <div class="mb-2">
+                <label for="password">Password *</label>
+                <input type="password" class="form-control"
+                    formControlName="password" placeholder="Create password">
+                <span class="text-danger error"
+                    *ngIf="user.get('password')?.touched && user.get('password')?.invalid">
+                    Password must be at least 8 characters long and include
+                    uppercase, lowercase, number, and special character.
+                </span>
+            </div>
+            <div class="mb-2">
+                <label for="confirmPassword">Confirm Password *</label>
+                <input type="password" class="form-control"
+                    formControlName="confirmPassword"
+                    placeholder="Re-enter password">
+                <span class="text-danger error"
+                    *ngIf="user.get('confirmPassword')?.touched && user.get('confirmPassword')?.invalid">
+                    Confirm Password is required.
+                </span>
+                <span class="error"
+                    *ngIf="user.get('confirmPassword')?.touched && user.get('password')?.value != user.get('confirmPassword')?.value">
+                    Password does not matched!!
+                </span>
+                <span class="text-success"
+                    *ngIf="user.get('confirmPassword')?.touched && user.get('password')?.value == user.get('confirmPassword')?.value && user.get('password')?.valid ">
+                    <small>Password matched</small>
+                </span>
+            </div>
+            <button type="submit" class="btn btn-success w-100"
+                [disabled]="user.invalid">Register</button>
+        </form>
+        <div class="text-center mt-2">
+            <small>Already have an account?
+                <a routerLink="/login">Login here</a>
+            </small>
+        </div>
+    </div>
+</div>
